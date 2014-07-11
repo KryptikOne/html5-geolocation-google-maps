@@ -1,0 +1,75 @@
+@import "normalize";
+// Variables
+$green : rgba(#153f1c, 0.6);
+$other-green : rgba(#153f1c, 0.3);
+$bg : #112a11;
+$black : #000000;
+$other-other-green : #44ab17;
+
+.map-container {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background: $bg;
+}
+#map {
+	position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.grid {
+  position:absolute;
+  display:block;
+  width:100%;
+  height:100%;
+  background-color: $bg;
+  background-image: linear-gradient(transparent 49px, $green 49px,$green 51px, transparent 51px),
+    linear-gradient(90deg, transparent 49px, $green 49px,$green 51px, transparent 51px),
+    linear-gradient(transparent 9px, $other-green 9px,$other-green 10px, transparent 10px),
+    linear-gradient(90deg, transparent 9px, $other-green 9px,$other-green 10px, transparent 10px);
+  background-size:100px 100px, 100px 100px, 20px 20px, 20px 20px;
+  background-position:center;
+
+  box-shadow:inset 0 0 30px 0 $black;
+}
+
+.preloader {
+	display: table;
+	top: calc(50% - 75px);
+  width: 150px;
+  height: 150px;
+  line-height: 1;
+  margin: auto;
+  position: relative;
+  box-sizing: border-box;
+  text-align: center;
+  z-index: 0;
+  text-transform: uppercase;
+  font-family: monospace;
+  font-size: 0.8em;
+  color: $other-other-green;
+  span { display: table-cell; vertical-align: middle;height: 150px; }
+  &:before,
+	&:after {
+	  opacity: 0;
+	  box-sizing: border-box;
+	  content: "\0020";
+	  position: absolute;
+	  top: 0;
+	  left: 0;
+	  width: 100%;
+	  height: 100%;
+	  border-radius: 50%;
+	  border: 5px solid rgba($other-other-green,0.9);
+	  box-shadow: 0 0 20px rgba($other-other-green,0.3), inset 0 0 30px rgba($other-other-green,0.3);
+	}
+	&:after { z-index: 1; animation: radarAnimation 1s infinite 1s; }
+	&:before { z-index: 2; animation: radarAnimation 1s infinite; }
+}
+
+@keyframes radarAnimation {
+  0% { opacity: 0; transform: scale(0); }
+  50% { opacity: 1; }
+  100% { opacity: 0; transform: scale(1); }
+}
