@@ -39,7 +39,7 @@
 
                 var map = new google.maps.Map( element[0], mapOptions );
 
-                var markerIcon = { url: 'images/crosshairs.png' };
+                var markerIcon = { url: 'src/images/crosshairs.png' };
 
                 var mapMarker = new google.maps.Marker({
                     position: currentPosition,
@@ -67,6 +67,14 @@
                 //     }
                 // });
 
+                // Handling the re-centering of the pin on window resize
+                // =====================================================
+                google.maps.event.addDomListener(window, 'resize', function() {
+                    var center = map.getCenter();
+                    google.maps.event.trigger(map, 'resize');
+                    map.setCenter(center);
+                });
+
             } // END displayCurrentPosition()
 
             // Errors that will display when HTML5 geolocation throws an error
@@ -88,6 +96,8 @@
                 }
             } // END onError()
 
+            // Checking if Browser supports HMTL5 Geolocation if so run our code above
+            // =======================================================================
             if ( navigator.geolocation ) {
                 navigator.geolocation.getCurrentPosition( displayCurrentPosition , onError);
             } else {
